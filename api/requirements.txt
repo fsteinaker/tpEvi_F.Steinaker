@@ -2,3 +2,4 @@ flask
 flask_sqlalchemy
 psycopg2-binary
 sqlalchemy
+flask_cors

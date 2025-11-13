@@ -47,7 +47,7 @@ Los datos se conservarán gracias al volumen db_data.
 
 ## 🧪 Endpoint de prueba
 Crear tarea:
-curl -X POST http://localhost:5000/tasks -H "Content-Type: application/json" -d '{"title":"Revisión de reportes","status":"ToDo"}'
+curl -X POST http://localhost:5000/tasks -H "Content-Type: application/json" -d "{\"title\":\"Revisión de reportes\",\"status\":\"ToDo\"}"
 
 Listar tareas:
 curl http://localhost:5000/tasks
