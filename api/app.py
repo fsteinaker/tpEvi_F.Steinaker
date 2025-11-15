@@ -30,7 +30,7 @@ def get_tasks():
 @app.route('/tasks', methods=['POST'])
 def create_task():
     try:
-        data = request.get_json(force=True)  # 👈 fuerza a interpretar el body como JSON
+        data = request.get_json(force=True)
         if not data:
             return jsonify({'error': 'No se recibió JSON'}), 400
         
@@ -48,6 +48,36 @@ def create_task():
     
     except Exception as e:
         return jsonify({'error': f'Error procesando la solicitud: {str(e)}'}), 400
+
+# Ruta para actualizar una tarea por id
+@app.route('/tasks/<int:id>', methods=['PUT'])
+def update_task(id):
+    task = Task.query.get(id)
+    if not task:
+        return jsonify({'error': 'Tarea no encontrada'}), 404
+
+    data = request.get_json(force=True)
+    title = data.get('title')
+    status = data.get('status')
+
+    if title:
+        task.title = title
+    if status:
+        task.status = status
+
+    db.session.commit()
+    return jsonify({'message': 'Tarea actualizada correctamente'})
+
+# Ruta para eliminar una tarea por id
+@app.route('/tasks/<int:id>', methods=['DELETE'])
+def delete_task(id):
+    task = Task.query.get(id)
+    if not task:
+        return jsonify({'error': 'Tarea no encontrada'}), 404
+
+    db.session.delete(task)
+    db.session.commit()
+    return jsonify({'message': 'Tarea eliminada correctamente'})
 
 # Ruta raíz para testeo
 @app.route('/')

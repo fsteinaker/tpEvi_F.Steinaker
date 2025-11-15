@@ -1,18 +1,18 @@
-# 🧾 Plataforma Interna de Tareas (Flask + PostgreSQL)
+# Plataforma Interna de Tareas (Flask + PostgreSQL)
 
-## 🚀 Descripción
+## Descripción
 Aplicación interna para una PyME que permite a los empleados gestionar tareas, visualizar su estado y generar reportes simples.
 
-## 🛠️ Tecnologías
+## Tecnologías
 - **Flask (Python)** – Backend API
 - **PostgreSQL** – Base de datos relacional
 - **SQLAlchemy** – ORM para conexión con la base
 - **Adminer** – Visualización y administración de datos
 - **Docker Compose** – Orquestación de contenedores
 
-## ⚙️ Instalación y ejecución
+## Instalación y ejecución
 
-1. Clonar el repositorio o copiar los archivos del proyecto.
+1. Clonar el repositorio o copiar los archivos del proyecto. Inicializar Docker Desktop.
 
 2. Crear el archivo `.env` con las variables de entorno:
    ```bash
@@ -45,20 +45,38 @@ Los datos se conservarán gracias al volumen db_data.
     docker compose down
     docker compose up --build -d
 
-## 🧪 Endpoint de prueba
-Crear tarea:
-curl -X POST http://localhost:5000/tasks -H "Content-Type: application/json" -d "{\"title\":\"Revisión de reportes\",\"status\":\"ToDo\"}"
+## Endpoint de prueba
+Crear tareas (POST):
+    curl -X POST http://localhost:5000/tasks -H "Content-Type: application/json" -d "{\"title\":\"Revisión de reportes\",\"status\":\"ToDo\"}"
 
-Listar tareas:
-curl http://localhost:5000/tasks
+    curl -X POST http://localhost:5000/tasks -H "Content-Type: application/json" -d "{\"title\":\"Actualizar base de datos\",\"status\":\"InProgress\"}"
+
+    curl -X POST http://localhost:5000/tasks -H "Content-Type: application/json" -d "{\"title\":\"Backup semanal del servidor\",\"status\":\"Done\"}"
+
+    curl -X POST http://localhost:5000/tasks -H "Content-Type: application/json" -d "{\"title\":\"Configurar entorno de desarrollo\",\"status\":\"ToDo\"}"
+
+    curl -X POST http://localhost:5000/tasks -H "Content-Type: application/json" -d "{\"title\":\"Depurar errores en la API\",\"status\":\"InProgress\"}"
+
+    curl -X POST http://localhost:5000/tasks -H "Content-Type: application/json" -d "{\"title\":\"Pruebas de integración\",\"status\":\"ToDo\"}"
+
+    curl -X POST http://localhost:5000/tasks -H "Content-Type: application/json" -d "{\"title\":\"Documentar endpoints del sistema\",\"status\":\"Done\"}"
+
+# Listar tareas (GET):
+    curl http://localhost:5000/tasks
+
+# Actualizar tarea (PUT):
+    curl -X PUT http://localhost:5000/tasks/1 -H "Content-Type: application/json" -d "{\"title\":\"Reporte revisado\",\"status\":\"Done\"}"
+
+# Eliminar tarea (DELETE):
+    curl -X DELETE http://localhost:5000/tasks/1
 
 ---
 
-## 📄 ** Documento de decisiones tecnológicas**
+## ** Documento de decisiones tecnológicas**
 
-# 📘 Decisiones Tecnológicas y Justificación
+# Decisiones Tecnológicas y Justificación
 
-## 🧱 Stack elegido: Flask + PostgreSQL + Adminer + Docker Compose
+## Stack elegido: Flask + PostgreSQL + Adminer + Docker Compose
 
 ### Flask
 - Framework liviano y modular de Python.
@@ -86,7 +104,7 @@ curl http://localhost:5000/tasks
 
 ---
 
-## 🏁 **Conclusiones**
+## **Conclusiones**
 - El sistema cumple con la modularidad y persistencia requeridas.  
 - El stack elegido permite escalar o migrar a producción sin cambios significativos.  
 - La estructura con Docker Compose facilita la corrección, reutilización y portabilidad del proyecto.
